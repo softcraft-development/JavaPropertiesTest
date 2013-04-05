@@ -1,0 +1,52 @@
+<project name="PropertiesTest" basedir="." default="default">
+	<property environment="env"/>
+	<property name="tomcat.deploydir"               value="${env.TOMCAT_HOME}/webapps" />
+	<property name="dist.dir" value="${basedir}/dist" />
+
+	<target name="default" depends="clean,setup,compile,buildwar,deploy"></target>
+	
+	<target name="clean">
+		<delete dir="${dist.dir}" />
+	</target>
+
+	<target name="setup">
+	    <mkdir dir="${dist.dir}" />
+	    <echo>Copying web into dist</echo>
+	    <copy todir="${dist.dir}/web" >
+	    	<fileset dir="${basedir}/web" />
+		</copy>
+	    <copydir dest="${dist.dir}/web/WEB-INF/lib" src="${basedir}/web/WEB-INF/lib" />
+	</target>
+	
+	<target name="compile">
+	    <delete dir="${dist.dir}/web/WEB-INF/classes" />
+	    <mkdir dir="${dist.dir}/web/WEB-INF/classes" />
+	    <javac destdir="${dist.dir}/web/WEB-INF/classes" srcdir="src">
+	        <classpath>
+	            <fileset dir="${basedir}/web/WEB-INF/lib">
+	                  <include name="*" />
+	            </fileset>
+	        </classpath>
+	    </javac>
+	    <copy todir="${dist.dir}/web/WEB-INF/classes">
+	        <fileset dir="src">
+	            <include name="**/*.properties" />
+	            <include name="**/*.xml" />
+	        </fileset>
+	    </copy>
+	</target>
+	
+	<target name="buildwar">
+	    <war basedir="${basedir}/dist/web" destfile="proptest.war"
+	     webxml="${basedir}/dist/web/WEB-INF/web.xml">
+	        <exclude name="WEB-INF/**" />
+	        <webinf dir="${basedir}/dist/web/WEB-INF/">
+	        	<include name="**/*" />
+	        </webinf>
+	    </war>
+	</target>
+	
+	<target name="deploy">
+	    <copy file="proptest.war" todir="${tomcat.deploydir}" />
+	</target>
+</project>
