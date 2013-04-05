@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+    version="2.4">
+<display-name>PropertiesTest</display-name>
+<servlet>
+   <servlet-name>proptestservlet</servlet-name>
+   <servlet-class>ca.softcraft.propertiestest.servlet.SomeServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+   <servlet-name>proptestservlet</servlet-name>
+   <url-pattern>/proptestapp/*</url-pattern>
+</servlet-mapping>
+
+</web-app>
