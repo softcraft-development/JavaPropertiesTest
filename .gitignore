@@ -2,3 +2,4 @@
 /stacktrace.log
 /proptest.war
 .DS_Store
+/bin
