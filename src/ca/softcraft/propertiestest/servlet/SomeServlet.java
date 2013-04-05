@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ca.softcraft.Robot;
+
 public class SomeServlet extends HttpServlet {
 
 		/**
@@ -32,6 +34,7 @@ public class SomeServlet extends HttpServlet {
 		Properties properties = new Properties();
 		properties.load(resourceAsStream);
 		response.getWriter().println("The value of myproperty is: " + properties.getProperty("myproperty"));
+		response.getWriter().println("My robot's name is: " + Robot.NAME);
 	}
 
 	@SuppressWarnings("unused")
